@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Te quiero</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      overflow: hidden;
+      font-family: 'Courier New', Courier, monospace;
+    }
+
+    .te-quiero {
+      font-size: 3em;
+      color: white;
+      animation: flotar 4s ease-in-out infinite;
+      text-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+
+    @keyframes flotar {
+      0% { transform: translateY(0px); opacity: 1; }
+      50% { transform: translateY(-20px); opacity: 0.8; }
+      100% { transform: translateY(0px); opacity: 1; }
+    }
+
+    .mensaje {
+      position: absolute;
+      bottom: 20px;
+      font-size: 1.5em;
+      color: #ffffffa0;
+      opacity: 0;
+      transition: opacity 0.4s ease-in-out;
+    }
+
+    .mostrar {
+      opacity: 1 !important;
+    }
+  </style>
+</head>
+<body onclick="mostrarMensaje()">
+  <div class="te-quiero">Te quiero</div>
+  <div id="mensaje" class="mensaje">Mi reina</div>
+
+  <script>
+    function mostrarMensaje() {
+      const mensaje = document.getElementById("mensaje");
+      mensaje.classList.add("mostrar");
+      setTimeout(() => mensaje.classList.remove("mostrar"), 2000);
+    }
+  </script>
+</body>
+</html>
