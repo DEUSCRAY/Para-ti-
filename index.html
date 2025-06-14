@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corazón de Partículas</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: black;
+      font-family: 'Georgia', serif;
+    }
+    canvas {
+      display: block;
+    }
+    #text {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      font-size: 1.2rem;
+      color: #ff0044;
+      text-shadow: 0 0 10px #ff0044;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<div id="text">
+  Sus palabras mi credo, sus órdenes mi fe, su ambición mi futuro y mi vida tu escudo ¡úsame!
+</div>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+let width = canvas.width = window.innerWidth;
+let height = canvas.height = window.innerHeight;
+
+let particles = [];
+const particleCount = 800;
+const heartFunction = t => {
+    const x = 16 * Math.pow(Math.sin(t), 3);
+    const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+    return [x, -y];
+};
+
+function createHeartParticles() {
+  particles = [];
+  for (let i = 0; i < particleCount; i++) {
+    const t = Math.PI * 2 * Math.random();
+    const [hx, hy] = heartFunction(t);
+    const x = width/2 + hx * 10;
+    const y = height/2 + hy * 10;
+    particles.push({x, y, ox: x, oy: y, dx: 0, dy: 0});
+  }
+}
+
+function updateParticles() {
+  for (let p of particles) {
+    p.x += (p.ox - p.x) * 0.05;
+    p.y += (p.oy - p.y) * 0.05;
+  }
+}
+
+function explodeParticles() {
+  for (let p of particles) {
+    p.dx = (Math.random() - 0.5) * 20;
+    p.dy = (Math.random() - 0.5) * 20;
+    p.x += p.dx;
+    p.y += p.dy;
+  }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, width, height);
+  ctx.fillStyle = "#ff0044";
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+    ctx.fill();
+  }
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  updateParticles();
+  drawParticles();
+}
+
+canvas.addEventListener('mousedown', explodeParticles);
+canvas.addEventListener('touchstart', explodeParticles);
+canvas.addEventListener('mouseup', createHeartParticles);
+canvas.addEventListener('touchend', createHeartParticles);
+
+window.addEventListener('resize', () => {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+  createHeartParticles();
+});
+
+createHeartParticles();
+animate();
+</script>
+</body>
+</html>
