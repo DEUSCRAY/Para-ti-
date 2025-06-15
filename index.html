@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carta para Génesis</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      background: #fdeff1;
+      font-family: 'Roboto', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .envelope {
+      position: relative;
+      width: 300px;
+      height: 200px;
+      background: #d94b4b;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .envelope::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      z-index: 1;
+    }
+    .letter {
+      position: absolute;
+      top: -240px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 280px;
+      background: white;
+      padding: 20px;
+      border-radius: 5px;
+      text-align: center;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      transition: top 1.5s ease;
+    }
+    .envelope:hover .letter {
+      top: -320px;
+    }
+    .letter h1 {
+      font-family: 'Great Vibes', cursive;
+      color: #d94b4b;
+      margin: 10px 0;
+    }
+    .letter p {
+      font-size: 16px;
+      color: #333;
+    }
+    .footer {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      font-size: 14px;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope">
+    <div class="letter">
+      <img src="https://img.icons8.com/emoji/48/handshake.png" alt="friendship" width="48" />
+      <h1>Para Génesis</h1>
+      <p>Tu Belleza es inefable, Tu presencia Onírica, Tu voz meliflua, son todo lo que mi alma Lánguida tanto admira y es por eso mismo que quiero que la distancia no te haga olvidar que te quiero y que mi silencio no te haga pensar que me olvide de ti, se te quiere mucho.</p>
+    </div>
+    <div class="footer">De: Ángel</div>
+  </div>
+
+  <audio id="music" autoplay>
+    <source src="SpanishGirl.mp3" type="audio/mpeg">
+    Tu navegador no soporta la reproducción de audio.
+  </audio>
+
+  <script>
+    const music = document.getElementById('music');
+    document.querySelector('.envelope').addEventListener('mouseover', () => {
+      music.play();
+    });
+  </script>
+</body>
+</html>
